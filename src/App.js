@@ -18,7 +18,6 @@ const App = () => {
 
         <Switch>
           <Route exact path="/" render={() => <Home />} />
-          {/* <Route exact path="/authentication" render={() => <SignIn />}></Route> */}
           <Route exact path="/leagues" render={() => <SectionTwo />} />
           <Route
             path="/leagues/:league"
@@ -36,7 +35,7 @@ const App = () => {
           />
           <Route exact path="/disclaimer" render={() => <Disclaimer />} />
           <Route path="/">
-            <h1>Error 404: Page not found</h1>
+            <h5>Error 404: Page not found</h5>
           </Route>
         </Switch>
       </div>
