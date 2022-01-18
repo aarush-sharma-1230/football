@@ -20,6 +20,10 @@ const League = (props) => {
     borderBottom: `3px solid ${foreground}`,
   };
 
+  const alternateStyle = {
+    color: `${foreground}`,
+  };
+
   const initialStyleMatchesButton = {
     backgroundColor: `${background}`,
     borderBottom: `3px solid ${background}`,
@@ -31,8 +35,9 @@ const League = (props) => {
 
   const [status, setStatus] = useState("Standings");
   const [upcomingFixtures, setUpcomingFixtures] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const [standingsLoadingState, setStandingsLoadingState] = useState(true);
+  const [matchesLoadingState, setMatchesLoadingState] = useState(true);
+  const [limit, setLimit] = useState(false);
   const [standings, setStandings] = useState([]);
   const [styleMatches, setStyleMatches] = useState(initialStyleMatchesButton);
   let leagueName = "";
@@ -91,8 +96,14 @@ const League = (props) => {
     };
     const response = await axios(config);
     const receivedData = JSON.parse(JSON.stringify(response.data));
-    console.log(receivedData);
-    setStandings(receivedData.response[0].league.standings[0]);
+
+    if (receivedData.results === 0) {
+      setStandingsLoadingState(false);
+      setLimit(true);
+    } else {
+      setStandings(receivedData.response[0].league.standings[0]);
+      setStandingsLoadingState(false);
+    }
   };
 
   const apiRequestMatches = async (leagueID) => {
@@ -115,7 +126,7 @@ const League = (props) => {
         return 0 <= differenceDays && differenceDays <= 7;
       })
     );
-    setLoading(false);
+    setMatchesLoadingState(false);
   };
 
   useEffect(() => {
@@ -124,6 +135,91 @@ const League = (props) => {
       : apiRequestMatches(leagueID);
   }, [leagueID, status]);
 
+  const standingsContent = (
+    <div className="league-table center" style={backgroundStyle}>
+      <div className="table-data">
+        <table>
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Name</th>
+              <th>Points</th>
+              <th>P</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>GF</th>
+              <th>GA</th>
+              <th>GD</th>
+              <th>Form</th>
+            </tr>
+          </thead>
+          <tbody>
+            {standings.map((team, index) => {
+              return (
+                <>
+                  <tr key={index}>
+                    <td>{team.rank}</td>
+                    <td>{team.team.name}</td>
+                    <td>{team.points}</td>
+                    <td>{team.all.played}</td>
+                    <td>{team.all.win}</td>
+                    <td>{team.all.draw}</td>
+                    <td>{team.all.lose}</td>
+                    <td>{team.all.goals.for}</td>
+                    <td>{team.all.goals.against}</td>
+                    <td>{team.goalsDiff}</td>
+                    <td>{team.form}</td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const loadingContent = (
+    <div className="center alternate-text" style={alternateStyle}>
+      <h5>Loading...</h5>
+    </div>
+  );
+
+  const zeroMatchesContent = (
+    <div className="center alternate-text" style={alternateStyle}>
+      <h5>There is no upcoming fixture for the coming week</h5>
+    </div>
+  );
+
+  const limitReachedContent = (
+    <div className="center alternate-text" style={alternateStyle}>
+      <h5>
+        We have reached the limit of our service today. Please try again later.
+      </h5>
+    </div>
+  );
+
+  const matchesContent = (
+    <div className="fixtures">
+      {upcomingFixtures.length === 0 && matchesLoadingState === false
+        ? zeroMatchesContent
+        : upcomingFixtures.map((fixture) => {
+            const awayTeam = fixture.teams.away;
+            const homeTeam = fixture.teams.home;
+            const timeOfFixture = new Date(fixture.fixture.date);
+            return (
+              <FixtureCard
+                homeTeam={homeTeam}
+                awayTeam={awayTeam}
+                timeOfFixture={timeOfFixture}
+                background={background}
+                foreground={foreground}
+              />
+            );
+          })}
+    </div>
+  );
   return (
     <div>
       <div className="padding-small league" style={backgroundStyle}>
@@ -136,71 +232,15 @@ const League = (props) => {
         <button onClick={activateMatches} style={styleMatches}>
           Matches
         </button>
-        {status === "Standings" ? (
-          <div className="league-table center" style={backgroundStyle}>
-            <div className="table-data">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Position</th>
-                    <th>Name</th>
-                    <th>Points</th>
-                    <th>P</th>
-                    <th>W</th>
-                    <th>D</th>
-                    <th>L</th>
-                    <th>GF</th>
-                    <th>GA</th>
-                    <th>GD</th>
-                    <th>Form</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {standings.map((team, index) => {
-                    return (
-                      <>
-                        <tr key={index}>
-                          <td>{team.rank}</td>
-                          <td>{team.team.name}</td>
-                          <td>{team.points}</td>
-                          <td>{team.all.played}</td>
-                          <td>{team.all.win}</td>
-                          <td>{team.all.draw}</td>
-                          <td>{team.all.lose}</td>
-                          <td>{team.all.goals.for}</td>
-                          <td>{team.all.goals.against}</td>
-                          <td>{team.goalsDiff}</td>
-                          <td>{team.form}</td>
-                        </tr>
-                      </>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ) : (
-          <div className="fixtures">
-            {upcomingFixtures.length === 0 && loading === false ? (
-              <h4>There is no upcoming fixture for the coming week</h4>
-            ) : (
-              upcomingFixtures.map((fixture) => {
-                const awayTeam = fixture.teams.away;
-                const homeTeam = fixture.teams.home;
-                const timeOfFixture = new Date(fixture.fixture.date);
-                return (
-                  <FixtureCard
-                    homeTeam={homeTeam}
-                    awayTeam={awayTeam}
-                    timeOfFixture={timeOfFixture}
-                    background={background}
-                    foreground={foreground}
-                  />
-                );
-              })
-            )}
-          </div>
-        )}
+        {limit
+          ? limitReachedContent
+          : status === "Standings"
+          ? standingsLoadingState
+            ? loadingContent
+            : standingsContent
+          : matchesLoadingState
+          ? loadingContent
+          : matchesContent}
       </div>
     </div>
   );
