@@ -1,0 +1,89 @@
+$primary: #ff6536;
+$secondary: #ffc7b6;
+
+.title {
+  color: white;
+  background-color: $primary;
+}
+
+.title img {
+  width: 25%;
+  border-radius: 50%;
+  float: right;
+  margin: 0 5%;
+}
+
+.leagues-title {
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.league-card a {
+  color: white;
+}
+
+.card {
+  position: relative;
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  z-index: 10;
+}
+.league-card img {
+  width: 100%;
+  border-radius: 2%;
+}
+
+.signin {
+  padding-top: 5%;
+  padding-bottom: 10%;
+  text-align: center;
+  color: white;
+  background-color: $primary;
+  //clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+}
+
+.signin h2 {
+  margin-bottom: 1%;
+}
+
+.signin button {
+  margin-top: 4%;
+  width: 50%;
+  padding: 1.5%;
+  border-radius: 5px;
+  background-color: $primary;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  border: 2.5px solid $secondary;
+  color: $secondary;
+}
+
+.signin button:hover {
+  cursor: default;
+}
+
+// .signin button:hover {
+//   border: 2.5px solid white;
+//   color: white;
+// }
+
+@media only screen and (max-width: 980px) {
+  .title img {
+    float: none;
+    margin: 5% auto;
+    width: 40%;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .title div {
+    margin: 2% auto;
+  }
+}

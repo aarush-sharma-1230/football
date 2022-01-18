@@ -1,0 +1,152 @@
+@import "./variables.scss";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  overflow-x: hidden;
+}
+
+h1 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 3.3rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+p {
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: "Quicksand", sans-serif;
+  outline: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  height: 50px;
+  text-align: left;
+  padding: 10px;
+}
+
+tr {
+  height: 40px;
+  border: none;
+  border-bottom: solid 1px white;
+}
+
+td {
+  text-align: left;
+  padding: 10px;
+}
+
+input {
+  display: block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input::selection {
+  border: none;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+  max-height: max-content;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+.padding-large {
+  padding: 7%;
+}
+
+.padding-medium {
+  padding: 5% 7%;
+}
+
+.padding-small {
+  padding: 3% 7%;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.center-margin {
+  margin: 0 auto;
+}
+
+.selected {
+  border-bottom: 3px solid $tertiary !important;
+}
+
+/* Scrollbar Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: grey white;
+}
+
+/* Scrollbar Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: beige;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: lightcoral;
+  border-radius: 2px;
+}
+
+@media only screen and (max-width: 1150px) {
+  .padding-large {
+    padding: 6% 4%;
+  }
+
+  .padding-medium {
+    padding: 4%;
+  }
+
+  .padding-small {
+    padding: 3% 4%;
+  }
+}

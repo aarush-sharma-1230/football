@@ -1,0 +1,110 @@
+@import "../../variables.scss";
+
+.league {
+  color: white;
+  padding-top: 10% !important;
+}
+
+.league-main {
+  width: 75%;
+}
+
+.league-main button {
+  width: 50%;
+  border: none;
+  padding: 2%;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.league-table {
+  color: white;
+  margin-top: 6%;
+}
+
+.league-table h3 {
+  padding: 2% 0;
+}
+
+.table-data {
+  width: 100%;
+}
+
+.table-data hr {
+  border: none;
+  border-bottom: 1px solid white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+
+.fixtures {
+  margin-top: 6%;
+}
+
+.fixture-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 5% auto;
+}
+
+.wrap-fixture-timezone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: inherit;
+}
+
+.wrap-fixture-card {
+  width: 80%;
+}
+
+.fixture-card {
+  padding: 2%;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixture-home {
+  width: 35%;
+  display: flex;
+  align-items: center;
+}
+
+.fixture-away {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.middle {
+  width: 30%;
+  display: inline-block;
+}
+
+.fixture-card img {
+  height: 30px;
+  margin-right: 5px;
+}
+
+// @media only screen and (max-width: 1150px) {
+//   .league-main {
+//     width: 80%;
+//   }
+// }
+
+// @media only screen and (max-width: 800px) {
+//   .league-main {
+//     width: 90%;
+//   }
+// }

@@ -1,0 +1,53 @@
+$primary: #ff6536;
+$secondary: #ff8c69;
+$tertiary: #ffc7b6;
+
+.authentication {
+  width: 30%;
+  margin: 2% auto;
+}
+
+.authentication button {
+  background-color: $primary;
+  width: 50%;
+  border: none;
+  border-bottom: 3px solid $primary;
+  padding: 3%;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.signup-form {
+  padding: 0;
+}
+
+.signup-form button {
+  width: 100%;
+  margin: 0;
+  padding: 3%;
+  border: 1px solid $primary;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 6% 2%;
+  margin: 0% 0;
+  border: none;
+  background-color: beige;
+}
+
+.signup-form input::placeholder {
+  font-size: 1.1rem;
+  color: grey;
+  font-family: "Quicksand", sans-serif;
+}
+
+.warning-bar {
+  background-color: $primary;
+  color: white;
+  padding: 0.1%;
+  margin: 2% 0;
+  width: 30%;
+}
