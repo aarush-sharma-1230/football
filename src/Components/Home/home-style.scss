@@ -24,6 +24,7 @@ $secondary: #ffc7b6;
 
 .card {
   position: relative;
+  overflow: hidden;
 }
 
 .card h3 {
@@ -34,7 +35,15 @@ $secondary: #ffc7b6;
 }
 .league-card img {
   width: 100%;
-  border-radius: 2%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.league-card img:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  filter: blur(2px);
+  transform: scale(1.1);
 }
 
 .signin {
@@ -43,7 +52,6 @@ $secondary: #ffc7b6;
   text-align: center;
   color: white;
   background-color: $primary;
-  //clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 }
 
 .signin h2 {
